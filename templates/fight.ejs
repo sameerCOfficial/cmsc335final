@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applicants Data</title>
+  </head>
+  <body>
+    <h1>Confirmation</h1>
+    <p><strong>Name: </strong><%= confirmationData.name %></p>
+    <p><strong>Email:</strong> <%= confirmationData.email %></p>
+    <p><strong>GPA: </strong> <%= confirmationData.gpa %></p>
+    <p><strong>Background Information:</strong> <%= confirmationData.bgInfo %></p>
+    <hr>
+    <p><strong>Task Completed at:</strong> <%= confirmationData.date.toString() %></p>
+    <hr>
+    <a href="/">Home</a>
+  </body>
+</html>

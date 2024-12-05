@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application</title>
+  <style>
+    form {
+      border: 2px solid black;
+      padding: 20px;
+      width: 500px;
+      margin-bottom: 20px;
+    }
+    #bginfo {
+      width: 100%;
+      height: 100px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Create your Battle!</h1>
+  <div class="section">
+    <h2>Select Basketball Player & Pokemon</h2>
+    <form action="/form" method="POST">
+      <label for="playerName">Player Name:</label>
+      <select id="playerName" name="name" style="border: 2px solid black" required>
+        <% players.forEach(player => { %>
+          <option value="<%= player.name %>"><%= player.name %></option>
+        <% }); %>
+      </select>
+      <label for="pokemonName">Pokémon Name:</label>
+      <input type="text" id="pokemon" name="pokemon" style="border: 2px solid black" required>
+      <input type="submit" value="Create battle">
+    </form>
+  </div>
+  
+  <div class="section">
+    <h2>Don't see your favorite player? Add Basketball Player!</h2>
+    <form action="/addPlayer" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" style="border: 2px solid black" required><br>
+      
+      <label for="team">Team:</label>
+      <input type="text" id="team" name="team" style="border: 2px solid black" required><br>
+      
+      <label for="height">Height:</label>
+      <input type="number" id="height" name="height" style="border: 2px solid black" required><br>
+      
+      <label for="weight">Weight:</label>
+      <input type="number" id="weight" name="weight" style="border: 2px solid black" required><br>
+      
+      <label for="position">Position:</label>
+      <input type="text" id="position" name="position" style="border: 2px solid black" required><br><br>
+      
+      <input type="reset" value="Reset">
+      <input type="submit" value="Add Player">
+    </form>
+  </div>
+  
+  <br>
+  <a href="/">Home</a>
+</body>
+</html>
