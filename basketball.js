@@ -2,11 +2,11 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const portNumber = process.argv[2] || 5001;
 require("dotenv").config({
   path: path.resolve(__dirname, "credentialsDontPost/.env"),
 });
 
+const portNumber = process.env.PORT || 5001;
 const name = process.env.MONGO_DB_USERNAME;
 const password = process.env.MONGO_DB_PASSWORD;
 const uri = `mongodb+srv://${name}:${password}@cmsc335cluster.msmos.mongodb.net/?retryWrites=true&w=majority&appName=cmsc335cluster;`;
