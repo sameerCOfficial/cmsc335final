@@ -40,11 +40,7 @@ async function createClient() {
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
-
-app.get("/form", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const client = await createClient();
     const players = await client
@@ -64,13 +60,36 @@ app.get("/wrong", (req, res) => {
 
 app.post("/form", async (req, res) => {
   const { playerName, pokemonName} = req.body;
+  // console.log(playerName);
+  // console.log(pokemonName);
   let pokemon;
   let result;
   try  {
-    pokemon = await getPokemon(pokemonName); 
+    pokemon = await getPokemon(pokemonName.toLowerCase()); 
+    // console.log(pokemon);
   } catch (err) {
     console.error("not a name", err);
     res.status(404).send("Internal Server Error");
+  }
+  
+  if (!pokemon) {
+    pokemon = {
+      name: "this isnt a pokemon",
+      weight: 0,
+      height: 0,
+      stats: [
+        {
+          base_stat: 0
+        }
+      ],
+      types: [
+        {
+          type: {
+            name: "this guy doesnt have a type"
+          }
+        }
+      ]
+    }
   }
 
   try {
@@ -86,6 +105,8 @@ app.post("/form", async (req, res) => {
     console.error("cant find player", err);
     res.status(404).send("Internal Server Error");
   }
+  console.log(result);
+  console.log(pokemon);
   res.render("fight", { pokemon: pokemon, player: result });
 })
 
@@ -133,7 +154,7 @@ async function insertPlayer(client, databaseAndCollection, player) {
 async function getPokemon(pokemonName) {
   try {
     const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
+      `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
     );
     if (!response.ok) {
       throw new Error(`Error fetching data`);

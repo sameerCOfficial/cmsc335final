@@ -1,19 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Applicants Data</title>
-  </head>
-  <body>
-    <h1>Confirmation</h1>
-    <p><strong>Name: </strong><%= confirmationData.name %></p>
-    <p><strong>Email:</strong> <%= confirmationData.email %></p>
-    <p><strong>GPA: </strong> <%= confirmationData.gpa %></p>
-    <p><strong>Background Information:</strong> <%= confirmationData.bgInfo %></p>
-    <hr>
-    <p><strong>Task Completed at:</strong> <%= confirmationData.date.toString() %></p>
-    <hr>
-    <a href="/">Home</a>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Result</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      height: 100vh;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+    }
+    .pokemon, .player {
+      flex: 1;
+      justify-content: center;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .pokemon {
+      background-color: #5eafff;
+    }
+    .player {
+      background-color: #7aff73;
+    }
+    .result {
+      text-align: center;
+      position: fixed;
+      top: 80%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem;
+      background-color: white;
+      padding: 0.5rem;
+      border: 1px solid #000000;
+      border-radius: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="pokemon">
+      <h1><%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)%></h1>
+      Height: <%= pokemon.height %> In.<br>
+      Weight: <%= pokemon.weight %> Lbs. <br>
+      Attack: <%= pokemon.stats[0].base_stat %> <br>
+      Types: <%= pokemon.types[0].type.name.charAt(0).toUpperCase() + pokemon.types[0].type.name.slice(1)%>
+    </div>
+    <div class="player">
+      <h1><%= player.name %></h1>
+      Team: <%= player.team %><br>
+      Height: <%= player.height %> In. <br>
+      Weight: <%= player.weight %> Lbs.<br>
+      Position: <%= player.position %>
+    </div>
+  </div>
+  <div class="result">
+    <% if ((player.name === "Lebron James") && pokemon.name !== "this isnt a pokemon" ) { %>
+      <p> I'm going to be honest, it doesn't matter what pokemon you put, bron is winning</p>
+      <% } else if (player.name === "Sameer Chawla") { %>
+        <p>You have too much faith in me.</p>
+      <% } else if (pokemon.name === "this isnt a pokemon") { %>
+        <p> Who are you trying to 1v1 </p>
+      <% } else if (player.name === "Stephen Curry") { %>
+        <p> Curry way downtown BANG!! BANG!!! </p>
+    <% } else if (pokemon.weight < player.weight && pokemon.height < player.height) { %>
+      <p>Your favorite Pokémon probably doesn't stand the best chance.</p>
+    <% } else if (pokemon.weight > player.weight && pokemon.height < player.height && player.weight + 100 > pokemon.weight) { %> 
+      <p>This is close to an even fight</p>
+    <% } else if ((pokemon.weight > player.weight && pokemon.height > player.height) || pokemon.weight > player.weight + 200) { %> 
+      <p>your favorite player is not scoring a single point sorry bro</p>
+    <% } else { %> 
+      <p>idk this seems even, but id need more info, info i do not have the energy to retrieve, so you can decide for yourself</p>
+    <% } %>
+  </div>
+  <a href="/">Home</a>
+</body>
 </html>
