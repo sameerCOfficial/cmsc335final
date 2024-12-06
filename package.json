@@ -1,17 +1,16 @@
 {
-  "name": "summercamp",
+  "name": "cmsc335final",
   "version": "1.0.0",
-  "description": "",
-  "main": "summerCampServer.js",
+  "description": "final project for cmsc335",
+  "main": "basketball.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "mongodb": "^6.11.0"
   }
 }
