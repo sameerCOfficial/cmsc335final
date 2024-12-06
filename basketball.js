@@ -123,13 +123,10 @@ app.post("/addPlayer", async (req, res) => {
   try {
     const client = await createClient();
     await insertPlayer(client, databaseAndCollection, newPlayer);
+    res.redirect("/");
   } catch (err) {
     console.error("Error trying to add new player:", err);
     res.status(404).send("Internal Server Error");
-  } finally {
-    if (client) {
-      await client.close();
-    }
   }
 });
 
@@ -169,6 +166,6 @@ async function getPokemon(pokemonName) {
   }
 }
 
-app.listen(portNumber, '0.0.0.0', () => {
-  console.log(`Server running on port ${portNumber}`);
+app.listen(portNumber, () => {
+  console.log(`Server running on port http://localhost:${portNumber}`);
 });
