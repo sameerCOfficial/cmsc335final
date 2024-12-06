@@ -123,7 +123,6 @@ app.post("/addPlayer", async (req, res) => {
   try {
     const client = await createClient();
     await insertPlayer(client, databaseAndCollection, newPlayer);
-    res.redirect("/");
   } catch (err) {
     console.error("Error trying to add new player:", err);
     res.status(404).send("Internal Server Error");
