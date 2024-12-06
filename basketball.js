@@ -2,10 +2,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-require("dotenv").config({
-  path: path.resolve(__dirname, "credentialsDontPost/.env"),
-});
-
+require("dotenv").config();
 const portNumber = process.env.PORT || 5001;
 const name = process.env.MONGO_DB_USERNAME;
 const password = process.env.MONGO_DB_PASSWORD;
@@ -51,6 +48,10 @@ app.get("/", async (req, res) => {
     res.render("form", { players });
   } catch (error) {
     res.status(500).send("Server Error");
+  } finally {
+    if (client) {
+      await client.close();
+    }
   }
 });
 
@@ -104,6 +105,10 @@ app.post("/form", async (req, res) => {
   } catch (err) {
     console.error("cant find player", err);
     res.status(404).send("Internal Server Error");
+  } finally {
+    if (client) {
+      await client.close();
+    }
   }
   console.log(result);
   console.log(pokemon);
@@ -128,6 +133,10 @@ app.post("/addPlayer", async (req, res) => {
   } catch (err) {
     console.error("Error trying to add new player:", err);
     res.status(404).send("Internal Server Error");
+  } finally {
+    if (client) {
+      await client.close();
+    }
   }
 });
 
