@@ -168,6 +168,6 @@ async function getPokemon(pokemonName) {
   }
 }
 
-app.listen(portNumber, () => {
-  console.log(`Server running on http://localhost:${portNumber}`);
+app.listen(portNumber, '0.0.0.0', () => {
+  console.log(`Server running on port ${portNumber}`);
 });
