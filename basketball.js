@@ -48,10 +48,6 @@ app.get("/", async (req, res) => {
     res.render("form", { players });
   } catch (error) {
     res.status(500).send("Server Error");
-  } finally {
-    if (client) {
-      await client.close();
-    }
   }
 });
 
@@ -105,11 +101,7 @@ app.post("/form", async (req, res) => {
   } catch (err) {
     console.error("cant find player", err);
     res.status(404).send("Internal Server Error");
-  } finally {
-    if (client) {
-      await client.close();
-    }
-  }
+  } 
   console.log(result);
   console.log(pokemon);
   res.render("fight", { pokemon: pokemon, player: result });
