@@ -47,7 +47,7 @@ app.get("/", async (req, res) => {
       .toArray();
     res.render("form", { players });
   } catch (error) {
-    res.status(500).send("Server Error");
+    res.status(500).send("Server Error", error);
   }
 });
 
